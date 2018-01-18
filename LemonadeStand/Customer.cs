@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace LemonadeStand
 {
-    class Program
+    class Customer
     {
-        static void Main(string[] args)
+        public int number;
+        Random purchaseCount;
+        Random purchasePrice;
+        public Customer()
         {
-            Game game = new Game();
+
         }
     }
 }
