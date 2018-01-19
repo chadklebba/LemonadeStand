@@ -8,11 +8,18 @@ namespace LemonadeStand
 {
     class Player
     {
-        string name;
+        public string name;
         double wallet;
         public Player()
         {
             wallet = 20.00;
+        }
+
+        public void GetName()
+        {
+            Console.Clear();
+            Console.WriteLine("Please enter your name.");
+            name = Console.ReadLine();
         }
     }
 }
