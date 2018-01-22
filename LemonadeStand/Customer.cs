@@ -9,8 +9,8 @@ namespace LemonadeStand
     class Customer
     {
         public int number;
-        int count;
-        double maxPrice;
+        public int count;
+        public double maxPrice;
         List<double> maxPriceList;
         Random purchaseCount;
         Random purchasePrice;
@@ -25,7 +25,7 @@ namespace LemonadeStand
 
         public void PickPurchaseCount()
         {
-            count = (purchaseCount.Next(1, 3));
+            count = (purchaseCount.Next(0, 3));
             
         }
         public double PickPriceMax()

@@ -9,10 +9,14 @@ namespace LemonadeStand
     class Player
     {
         public string name;
-        double wallet;
+        public Inventory inventory;
+        public Recipe recipe;
+        public Wallet wallet;
         public Player()
         {
-            wallet = 20.00;
+            inventory = new Inventory();
+            recipe = new Recipe();
+            wallet = new Wallet();
         }
 
         public void GetName()
