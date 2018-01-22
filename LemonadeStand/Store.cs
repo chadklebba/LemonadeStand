@@ -16,6 +16,7 @@ namespace LemonadeStand
 
         public void StringForecast(int currentDay, List<Weather> weatherList)
         {
+            forecastString = "";
             for (int i = (currentDay); i <= 6; i++)
             {
                 forecastString += weatherList[i].name + " - " + weatherList[i].sun + ", " + weatherList[i].temp + "\n";

@@ -86,7 +86,7 @@ namespace LemonadeStand
                 {
                     cupsPurchased += customer.count;
                 } 
-                if (cupsPurchased > cupsOfLemonade)
+                if (cupsPurchased == cupsOfLemonade)
                 {
                     break;
                 }
@@ -99,6 +99,8 @@ namespace LemonadeStand
 
         public void EndOfDay()
         {
+            double moneySpent = (((cupsOfLemonade * player.recipe.lemons) * .05) + ((cupsOfLemonade * player.recipe.sugar) * .03) + ((cupsOfLemonade * player.recipe.ice) * .01));
+            double moneyMade = (cupsPurchased * player.recipe.costPerCup);
             Console.Clear();
             string title = player.name + "'s " + weatherList[currentDay -1].name + " Financial Report";
             string title2 = weatherList[currentDay - 1].sun + ", " + weatherList[currentDay - 1].temp;
@@ -115,9 +117,30 @@ namespace LemonadeStand
             Console.WriteLine((cupsOfLemonade * player.recipe.sugar) + " cups of sugar at .03 = $" + ((cupsOfLemonade * player.recipe.sugar) * .03));
             Console.WriteLine((cupsOfLemonade * player.recipe.ice) + " ice cubes at .01 = $" + ((cupsOfLemonade * player.recipe.ice) * .01));
             Console.WriteLine("---------------------------------------------------------");
-            Console.WriteLine("Total: $" + (((cupsOfLemonade * player.recipe.lemons) * .05) + ((cupsOfLemonade * player.recipe.sugar) * .03) + ((cupsOfLemonade * player.recipe.ice) * .01)));
+            Console.WriteLine("Total: $" + moneySpent+ "\n");
+            Console.WriteLine("Money Made");
+            Console.WriteLine("----------");
+            Console.WriteLine("Cups of lemonade sold: " + cupsPurchased);
+            Console.WriteLine("Price per cup of lemonade: $" + player.recipe.costPerCup);
+            Console.WriteLine("---------------------------------------------------------");
+            Console.WriteLine("Total: $" + moneyMade+ "\n");
+            double profit = moneyMade - moneySpent;
+            if(profit >= 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Total profit for the day is: $" + profit);
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Total profit for the day is: $" + profit);
+                Console.ResetColor();
+            }
+            Console.WriteLine("Press Enter to continue");
             Console.ReadLine();
             cupsOfLemonade = 0;
+            currentDay++;
 
         }
 
@@ -125,19 +148,22 @@ namespace LemonadeStand
         {
             userInterface.DisplayInstructions();
             player.GetName();
-            store.StringForecast(currentDay, weatherList);
-            store.DisplayForecast(currentDay, weatherList);
-            store.BuyLemons(player);
-            store.BuySugar(player);
-            store.BuyIceCubes(player);
-            player.inventory.DisplayInventory();
-            player.recipe.DisplayRecipe();
-            player.recipe.QuestionRecipe();
-            player.recipe.CostPerCup();
-            MakeLemonade();
-            createCustomers(weatherList[currentDay - 1].customerCount);
-            DayStand();
-            EndOfDay();
+            for (int i = 1; i <= 7; i++)
+            {
+                store.StringForecast(currentDay, weatherList);
+                store.DisplayForecast(currentDay, weatherList);
+                store.BuyLemons(player);
+                store.BuySugar(player);
+                store.BuyIceCubes(player);
+                player.inventory.DisplayInventory();
+                player.recipe.DisplayRecipe();
+                player.recipe.QuestionRecipe();
+                player.recipe.CostPerCup();
+                MakeLemonade();
+                createCustomers(weatherList[currentDay - 1].customerCount);
+                DayStand();
+                EndOfDay();
+            }
         }
     }
 }
