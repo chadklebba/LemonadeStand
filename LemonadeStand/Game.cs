@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace LemonadeStand
 {
@@ -15,18 +16,22 @@ namespace LemonadeStand
         public Random random;
         public UserInterface userInterface;
         public Store store;
+        public SQLConnection connection;
         public int currentDay;
         public int cupsOfLemonade;
         public int cupsPurchased;
+        public double totalProfit;
         public Game()
         {
             player = new Player();
             random = new Random();
+            connection = new SQLConnection();
             customerList = new List<Customer>();
             weatherList = new List<Weather>();
             dayList = new List<string>() { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
             store = new Store();
             currentDay = 1;
+            totalProfit = 0;
             createWeather();
             userInterface = new UserInterface();
              
@@ -40,6 +45,7 @@ namespace LemonadeStand
         }
         public void createCustomers(int count)
         {
+            customerList.Clear();
             for (int i = 1; i <= count; i++)
             {
                 customerList.Add(new Customer(random) { number = i });
@@ -141,8 +147,32 @@ namespace LemonadeStand
             Console.ReadLine();
             cupsOfLemonade = 0;
             currentDay++;
+            totalProfit = totalProfit + profit;
 
         }
+        public void EndGame()
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+            string title = player.name + "'s " + "End of Game Report";
+            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (title.Length / 2)) + "}", title) + "\n");
+            Console.ResetColor();
+            if (totalProfit >= 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Total profit for the game is: $" + totalProfit);
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Total profit for the game is: $" + totalProfit);
+                Console.ResetColor();
+            }
+            Console.ReadLine();
+        }
+
+
 
         public void RunGame()
         {
@@ -163,7 +193,11 @@ namespace LemonadeStand
                 createCustomers(weatherList[currentDay - 1].customerCount);
                 DayStand();
                 EndOfDay();
+                
             }
+            EndGame();
+            connection.InsertHS(totalProfit, player.name);
+            connection.DisplayHS();
         }
     }
 }
