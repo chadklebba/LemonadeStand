@@ -21,7 +21,6 @@ namespace LemonadeStand
             sugar = 1;
             ice = 3;
         }
-
         public void DisplayRecipe()
         {
             Console.WriteLine("Your current recipe per cup is:" + "\r");
@@ -29,8 +28,6 @@ namespace LemonadeStand
             Console.WriteLine("$.03 - Sugar (cups) " + sugar + "\r");
             Console.WriteLine("$.01 - Ice cubes    " + ice + "\n");
             Console.WriteLine("That is $" + ((lemons*.05)+(sugar*.03)+(ice*.01)) + " per cup");
-            //Console.WriteLine("\n" + "Press Enter to Continue");
-            //Console.ReadLine();
         }
         public void OneLineRecipe()
         {

@@ -45,6 +45,7 @@ namespace LemonadeStand
                     }
               
                 }
+                Console.WriteLine("\n" + "Please press enter to continue");
                 Console.ReadLine();
             }
         }

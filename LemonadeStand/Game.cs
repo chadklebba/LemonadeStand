@@ -99,7 +99,8 @@ namespace LemonadeStand
             }
             Console.WriteLine("You sold " + cupsPurchased + " cups of lemonade today at " + player.recipe.costPerCup + " for a total of $" + (cupsPurchased*player.recipe.costPerCup));
             player.wallet.balance = player.wallet.balance + (cupsPurchased * player.recipe.costPerCup);
-            Console.WriteLine("You had " + (cupsOfLemonade - cupsPurchased) + " left when you closed.");
+            Console.WriteLine("You had " + (cupsOfLemonade - cupsPurchased) + " left when you closed. You had to throw them away.");
+            Console.WriteLine("\n" + "Please press enter to continue");
             Console.ReadLine();
         }
 
@@ -110,7 +111,6 @@ namespace LemonadeStand
             Console.Clear();
             string title = player.name + "'s " + weatherList[currentDay -1].name + " Financial Report";
             string title2 = weatherList[currentDay - 1].sun + ", " + weatherList[currentDay - 1].temp;
-            
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (title.Length / 2)) + "}", title) + "\r");
             Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + (title2.Length / 2)) + "}", title2) + "\n");
@@ -148,7 +148,6 @@ namespace LemonadeStand
             cupsOfLemonade = 0;
             currentDay++;
             totalProfit = totalProfit + profit;
-
         }
         public void EndGame()
         {
@@ -169,11 +168,9 @@ namespace LemonadeStand
                 Console.WriteLine("Total profit for the game is: $" + totalProfit);
                 Console.ResetColor();
             }
+            Console.WriteLine("\n" + "Please press enter to continue");
             Console.ReadLine();
         }
-
-
-
         public void RunGame()
         {
             userInterface.DisplayInstructions();

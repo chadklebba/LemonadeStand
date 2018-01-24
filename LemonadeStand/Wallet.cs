@@ -13,7 +13,5 @@ namespace LemonadeStand
         {
             balance = 10.00;
         }
-
-
     }
 }

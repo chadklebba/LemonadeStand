@@ -22,7 +22,6 @@ namespace LemonadeStand
             PickPurchaseCount();
             maxPrice = PickPriceMax();
         }
-
         public void PickPurchaseCount()
         {
             count = (purchaseCount.Next(0, 2));

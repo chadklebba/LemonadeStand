@@ -18,7 +18,6 @@ namespace LemonadeStand
             recipe = new Recipe();
             wallet = new Wallet();
         }
-
         public void GetName()
         {
             Console.Clear();

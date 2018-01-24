@@ -17,7 +17,6 @@ namespace LemonadeStand
             sugar = 0;
             iceCubes = 0;
         }
-
         public void DisplayInventory()
         {
             Console.Clear();
